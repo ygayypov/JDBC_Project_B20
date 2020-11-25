@@ -1,20 +1,15 @@
 package day2;
 
+import utility.DB_Utility;
+
 import java.sql.*;
 
 public class Review {
 
     public static void main(String[] args) throws SQLException {
-        String connectionStr = "jdbc:oracle:thin:@3.86.188.174:1521:XE";
-        String username = "hr" ;
-        String password = "hr" ;
 
-        Connection conn = DriverManager.getConnection(connectionStr,username,password) ;
-        // this way of creating statement will give you ability to generate
-        // ResultSet that can move forward and backward anytime
-        Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs   =   stmt.executeQuery("SELECT * FROM JOBS") ;
-
+        DB_Utility.createConnection();
+        ResultSet rs   = DB_Utility.runQuery ("SELECT * FROM JOBS") ;
 
         // I want to read the first row
         rs.next() ;
@@ -51,16 +46,12 @@ public class Review {
             System.out.println("MIN SALARY COLUMN AS NUMBER  $" + rs.getDouble("MIN_SALARY")    );
         }
 
-        // clean up the connection, statement and resultSet object after usage
-        rs.close();
-        stmt.close();
-        conn.close();
+        // clean up the connection , statement and resultSet object after usage
+        DB_Utility.destroy();
+
 
 
 
     }
 
 }
-
-
-
