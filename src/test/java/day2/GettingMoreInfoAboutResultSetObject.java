@@ -11,9 +11,8 @@ public class GettingMoreInfoAboutResultSetObject {
         String password = "hr" ;
 
         Connection conn = DriverManager.getConnection(connectionStr,username,password) ;
-        Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet rs   =   stmt.executeQuery("SELECT * FROM JOBS") ;
-        //ResultSet rs   =   stmt.executeQuery("SELECT * FROM EMPLOYEES") ;
+        Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet rs   =   stmnt.executeQuery("SELECT * FROM EMPLOYEES") ;
 
         // Metadata -- data about the data --
         // ResultSetMetaData -- data about the ResultSet object that contain our resulting rows and columns
@@ -39,9 +38,8 @@ public class GettingMoreInfoAboutResultSetObject {
         }
 
         rs.close();
-        stmt.close();
+        stmnt.close();
         conn.close();
-
 
     }
 

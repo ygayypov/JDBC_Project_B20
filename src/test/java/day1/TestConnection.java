@@ -10,8 +10,8 @@ public class TestConnection {
         String username = "hr" ;
         String password = "hr" ;
         Connection conn = DriverManager.getConnection(connectionStr,username,password) ;
-        Statement stmnt = conn.createStatement();
-        ResultSet rs   =   stmnt.executeQuery("SELECT * FROM REGIONS") ;
+        Statement stmt = conn.createStatement();
+        ResultSet rs   =   stmt.executeQuery("SELECT * FROM REGIONS") ;
         rs.next(); // currently we are at the very first row
         System.out.println("first column value using index: --> " +  rs.getString(1)   );
 

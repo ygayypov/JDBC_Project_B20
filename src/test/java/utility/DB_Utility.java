@@ -5,7 +5,7 @@ import java.sql.*;
 public class DB_Utility {
 
     static Connection conn ; // make it static field so we can reuse in every methods we write
-    static Statement stmt ;
+    static Statement stmnt ;
     static ResultSet rs ;
 
     public static void createConnection(){
@@ -29,27 +29,27 @@ public class DB_Utility {
 //        ResultSet rs  = null;
         // reusing the connection built from previous method
         try {
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = stmt.executeQuery(query) ;
+            Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmnt.executeQuery(query) ;
 
         } catch (SQLException e) {
-            System.out.println("Error while getting resultSet " + e.getMessage());
+            System.out.println("Error while getting resultset " + e.getMessage());
         }
 
         return rs ;
 
     }
-    // create a method to clean up all the connection statement and resultSet
+    // create a method to clean up all the connection statemnet and resultset
     public static void destroy(){
 
         try {
 
             rs.close();
-            stmt.close();
+            stmnt.close();
             conn.close();
 
-        } catch (SQLException throw_ables) {
-            throw_ables.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
 

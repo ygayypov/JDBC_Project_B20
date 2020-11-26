@@ -46,7 +46,7 @@ public class Review {
             System.out.println("MIN SALARY COLUMN AS NUMBER  $" + rs.getDouble("MIN_SALARY")    );
         }
 
-        // clean up the connection , statement and resultSet object after usage
+        // clean up the connection , statement and resultset object after usage
         DB_Utility.destroy();
 
 

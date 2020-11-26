@@ -11,9 +11,9 @@ public class LoopingResultSet {
             String password = "hr";
 
             Connection conn = DriverManager.getConnection(connectionStr, username, password);
-            Statement stmnt = conn.createStatement();
+            Statement stmt = conn.createStatement();
 
-            ResultSet rs = stmnt.executeQuery("SELECT * FROM REGIONS");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM REGIONS");
 
             //rs.next();==> method will return boolean value
             // if there is next row --> return true and move the pointer to next row
@@ -27,7 +27,7 @@ public class LoopingResultSet {
             }
 
             //iterate over all countries
-            rs = stmnt.executeQuery("select *from countries");
+            rs = stmt.executeQuery("select *from countries");
 
             // rs.next();
             //System.out.println(rs.getString(1));
