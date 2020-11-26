@@ -1,6 +1,8 @@
 package utility;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DB_Utility {
 
@@ -57,18 +59,59 @@ public class DB_Utility {
 
 
 
-    public static void main(String[] args) throws SQLException {
+    public static int getRowCount () {
+        int rowCount = 0;
+        try {
+            rs.last();
+            rowCount = rs.getRow();
 
-        createConnection();
+            //move the cursor back to beforeFirst location to avoid accident
+            rs.beforeFirst();
 
-        ResultSet rs =  runQuery("SELECT * FROM REGIONS");
+        }catch (SQLException e){
+            System.out.println("ERROR WHILE GETTING ROW COUNT " + e.getMessage());
+        }
+        return rowCount;
+    }
 
-        // print out second column first row
-        rs.next();
-        System.out.println(" rs.getString(2) = " + rs.getString(2)   );
+    //get the column count
+    //return count of column the result set have
 
+    public static int getColumnCount(){
+
+        int columnCount = 0;
+
+        try{
+            ResultSetMetaData rsmd = rs.getMetaData();
+            columnCount = rsmd.getColumnCount();
+        }catch (SQLException e){
+            System.out.println("ERROR WHILE GETTING COLUMN COUNT " + e.getMessage());
+        }
+        return columnCount;
+    }
+
+    //create a method that return all the column name as List<String>
+
+    public static List<String> getColumnNames (){
+
+        List<String> columnList = new ArrayList<>();
+
+        try {
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            for (int colNum = 1 ; colNum <= getColumnCount(); colNum++){
+                String columnName = rsmd.getColumnLabel(colNum);
+                columnList.add(columnName);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("ERROR WHILE GETTING ALL COLUMN NAMES " + e.getMessage());
+        }
+
+        return columnList;
 
     }
+
 
 
 }
