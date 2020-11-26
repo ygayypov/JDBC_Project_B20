@@ -29,7 +29,7 @@ public class DB_Utility {
 //        ResultSet rs  = null;
         // reusing the connection built from previous method
         try {
-            Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stmnt.executeQuery(query) ;
 
         } catch (SQLException e) {
